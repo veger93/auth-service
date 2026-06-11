@@ -1,5 +1,7 @@
 package com.service.authservice.controller;
 
+import com.service.authservice.dto.AuthResponse;
+import com.service.authservice.dto.LoginRequest;
 import com.service.authservice.dto.RegisterRequest;
 import com.service.authservice.entity.User;
 import com.service.authservice.service.AuthService;
@@ -30,5 +32,11 @@ public class AuthController {
                         "userId", user.getId(),
                         "username", user.getUsername()
                 ));
+    }
+
+    @PostMapping("/login")
+    public ResponseEntity<AuthResponse> login(@Valid @RequestBody LoginRequest request) {
+        AuthResponse response = authService.login(request);
+        return ResponseEntity.ok(response);
     }
 }
